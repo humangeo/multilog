@@ -156,4 +156,4 @@ Then, in your application, pass the root handler name into the logging config:
     import logging
     logging.config.fileConfig(config_path, defaults={"root_handler": "multilogClientHandler"})
 
-Multilog will always load the ``multilogServerHandler`` handler.  Additionally, if you don't want to run multilog, simply change your ``root_handler`` value to ``multilogServerHandler``.
+Multilog will always load the ``multilogServerHandler`` handler.  If you don't want to run Multilog (if you're running a single-threaded local dev server, for example), simply change your ``root_handler`` value to ``multilogServerHandler`` to write to the handler.
