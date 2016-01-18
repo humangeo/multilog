@@ -106,3 +106,54 @@ and for your application:
 
 
 The important field is the ``args`` block in the ``handler_multilogClientHandler`` section - those parameters should correspond to the server and ports on which the multilog daemon is listening. By default, the daemon uses ``localhost`` and ``logging.handlers.DEFAULT_TCP_LOGGING_PORT``.
+
+For Power Users
+---------------
+
+If you want to have Multilog share your application's config, you can do the following:
+
+.. code-block:: ini
+
+    [loggers]
+    keys=root,appName
+
+    [handlers]
+    keys=multilogClientHandler,multilogServerHandler
+
+    [formatters]
+    keys=simpleFormatter
+
+    [logger_root]
+    level=NOTSET
+    handlers=%(root_handler)s
+
+    [logger_appName]
+    level=INFO
+    handlers=
+    propagate=1
+    qualname=appName
+
+    [handler_multilogClientHandler]
+    class=handlers.SocketHandler
+    level=DEBUG
+    formatter=simpleFormatter
+    args=('localhost', handlers.DEFAULT_TCP_LOGGING_PORT)
+
+    [handler_multilogServerHandler]
+    class=handlers.TimedRotatingFileHandler
+    level=DEBUG
+    formatter=simpleFormatter
+    args=('/var/log/appName/appName.log', 'midnight')
+
+    [formatter_simpleFormatter]
+    class=logging.Formatter
+    format=%(asctime)s %(levelname)7s: PID: %(process)5s | %(message)s [in %(pathname)s:%(lineno)d]
+
+Then, in your application, pass the root handler name into the logging config:
+
+.. code-block:: python
+
+    import logging
+    logging.config.fileConfig(config_path, defaults={"root_handler": "multilogClientHandler"})
+
+Multilog will always load the ``multilogServerHandler`` handler.  Additionally, if you don't want to run multilog, simply change your ``root_handler`` value to ``multilogServerHandler``.
