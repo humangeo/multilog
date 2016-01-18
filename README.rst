@@ -9,7 +9,7 @@ Multilog
 
 A simple, multiprocess-safe logger for Python
 
-**This requires Python 3+**
+**This requires Python 3+. The future is now.**
 
 Why
 ---
@@ -17,11 +17,11 @@ Why
 Python's built-in loggers are pretty handy - they're easily customized and come with useful functionality out
 of the box, including things like file rotation. These file handlers are thread-safe, but not process-safe, so, if
 you're running a webserver in a pre-forking environment, for example, you run the risk of your workers trampling
-over each other in writing to a log file.
+over each other when writing to a common log file. File locking is a possible workaround, but that's yucky.
 
 To avoid this, it is recommended that one uses a socket-based logger (`a code sample is helpfully provided in the
 Logging Cookbook <https://docs.python.org/3.4/howto/logging-cookbook.html>`_). However, it is just a code snippet.
-Multilog is a dependency-free implementation of the sample socket loggeri with some niceties, like fileConfig
+Multilog is a dependency-free implementation of the sample socket logger with some niceties, like fileConfig
 support, and parameterization.
 
 How
