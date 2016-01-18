@@ -4,8 +4,8 @@ Multilog
 .. image:: https://travis-ci.org/humangeo/multilog.svg
    :target: https://travis-ci.org/humangeo/multilog
 
-.. image:: https://coveralls.io/repos/humangeo/multilog/badge.png
-   :target: https://coveralls.io/r/humangeo/multilog
+.. image:: https://coveralls.io/repos/github/humangeo/multilog/badge.svg?branch=master
+   :target: https://coveralls.io/github/humangeo/multilog?branch=master
 
 A simple, multiprocess-safe logger for Python
 
