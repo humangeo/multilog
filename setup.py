@@ -1,15 +1,21 @@
 """Set up the package."""
 
 import sys
+from codecs import open as codecs_open
 from setuptools import find_packages, setup
 
 if sys.version_info < (3, 0):
     sys.stdout.write("Multilog requires Python 3 or newer.\n")
     sys.exit(-1)
 
+# Get the long description from the relevant file
+with codecs_open('README.rst', encoding='utf-8') as f:
+    LONG_DESCRIPTION = f.read()
+
 setup(name='multilog',
       version='0.9.0',
       description="A simple logger for multiple Python processes.",
+      long_description=LONG_DESCRIPTION,
       classifiers=[
           "Development Status :: 5 - Production/Stable",
           "Environment :: No Input/Output (Daemon)",
