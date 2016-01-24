@@ -12,7 +12,6 @@ if sys.version_info < (3, 0):
 with codecs_open('README.rst', encoding='utf-8') as f:
     LONG_DESCRIPTION = f.read()
 
-
 setup(name='multilog',
       version='0.9.0',
       description="A simple logger for multiple Python processes.",
