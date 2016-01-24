@@ -1,5 +1,5 @@
 Multilog
-======
+========
 
 .. image:: https://travis-ci.org/humangeo/multilog.svg
    :target: https://travis-ci.org/humangeo/multilog
