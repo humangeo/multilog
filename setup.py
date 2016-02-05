@@ -13,7 +13,7 @@ with codecs_open('README.rst', encoding='utf-8') as f:
     LONG_DESCRIPTION = f.read()
 
 setup(name='multilog',
-      version='0.9.0',
+      version='1.0.0',
       description="A simple logger for multiple Python processes.",
       long_description=LONG_DESCRIPTION,
       classifiers=[
