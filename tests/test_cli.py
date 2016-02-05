@@ -1,9 +1,14 @@
 """Tests for the CLI"""
 
-from unittest.mock import patch
-
 from nose.tools import raises
+
 import multilog.scripts.cli as cli
+from multilog import IS_PYTHON2
+
+if IS_PYTHON2:
+    from mock import patch
+else:
+    from unittest.mock import patch
 
 @patch("os.path.exists")
 @patch("logging.config.fileConfig")

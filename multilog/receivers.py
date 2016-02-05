@@ -2,7 +2,13 @@
 
 import logging.handlers
 import select
-import socketserver
+
+from multilog import IS_PYTHON2
+
+if IS_PYTHON2:
+    import SocketServer as socketserver
+else:
+    import socketserver
 
 from .handlers import LogHandler
 

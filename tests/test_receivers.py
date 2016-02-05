@@ -1,13 +1,19 @@
 """Tests for the Socket Receiver"""
 
-from unittest.mock import patch
-
 from nose.tools import raises, eq_, ok_
 
 import multilog.receivers as receivers
 from multilog.handlers import LogHandler
+from multilog import IS_PYTHON2
 
-@patch("socketserver.ThreadingTCPServer.__init__")
+if IS_PYTHON2:
+    from mock import patch
+    SOCKETSERVER = "SocketServer"
+else:
+    from unittest.mock import patch
+    SOCKETSERVER = "socketserver"
+
+@patch(SOCKETSERVER + ".ThreadingTCPServer.__init__")
 def test_receiver_init_defaults(tcp_init_mock):
     receiver = receivers.LogReceiver()
     tcp_init_mock.assert_called_with(receiver, (receivers.DEFAULT_HOST, receivers.DEFAULT_PORT), LogHandler)
@@ -15,7 +21,7 @@ def test_receiver_init_defaults(tcp_init_mock):
     eq_(receiver.timeout, 1)
     eq_(receiver.logname, None)
 
-@patch("socketserver.ThreadingTCPServer.__init__")
+@patch(SOCKETSERVER + ".ThreadingTCPServer.__init__")
 def test_receiver_init_params(tcp_init_mock):
     receiver = receivers.LogReceiver(host="HOST", port=1313, handler="HANDLER")
     tcp_init_mock.assert_called_with(receiver, ("HOST", 1313), "HANDLER")

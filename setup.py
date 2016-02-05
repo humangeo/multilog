@@ -4,9 +4,12 @@ import sys
 from codecs import open as codecs_open
 from setuptools import find_packages, setup
 
+TEST_REQUIREMENTS = []
+
 if sys.version_info < (3, 0):
-    sys.stdout.write("Multilog requires Python 3 or newer.\n")
-    sys.exit(-1)
+    TEST_REQUIREMENTS.extend(["astroid==1.2.1", "pylint==1.3.1", "mock==1.3.0", "nose==1.3.7", "coverage==4.0.3"])
+else: # New Python
+    TEST_REQUIREMENTS.extend(["mock", "nose", "coverage", "pylint"])
 
 # Get the long description from the relevant file
 with codecs_open('README.rst', encoding='utf-8') as f:
@@ -22,7 +25,9 @@ setup(name='multilog',
           "Intended Audience :: Developers",
           "License :: OSI Approved :: MIT License",
           "Operating System :: POSIX",
-          "Programming Language :: Python :: 3 :: Only",
+          "Programming Language :: Python :: 2.6",
+          "Programming Language :: Python :: 2.7",
+          "Programming Language :: Python :: 3",
           "Topic :: System :: Logging"
       ],
       keywords='server multiprocess multiproc parallel logger logging logs',
@@ -35,7 +40,7 @@ setup(name='multilog',
       zip_safe=True,
       install_requires=[],
       extras_require={
-          'test': ['nose', 'pylint'],
+          'test': TEST_REQUIREMENTS,
       },
       entry_points="""
       [console_scripts]

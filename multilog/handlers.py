@@ -4,8 +4,14 @@ import logging
 import logging.config
 import logging.handlers
 import pickle
-import socketserver
 import struct
+
+from multilog import IS_PYTHON2
+
+if IS_PYTHON2:
+    import SocketServer as socketserver
+else:
+    import socketserver
 
 class LogHandler(socketserver.StreamRequestHandler):
     """Handle incoming logs"""
