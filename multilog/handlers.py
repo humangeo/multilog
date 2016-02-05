@@ -40,8 +40,5 @@ class LogHandler(socketserver.StreamRequestHandler):
         :param record: The record to write
 
         """
-        if self.server.logname is not None:
-            name = self.server.logname
-        else:
-            name = record.name
+        name = self.server.logname if self.server.logname is not None else record.name
         logging.getLogger(name).handle(record)
