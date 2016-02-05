@@ -9,7 +9,7 @@ Multilog
 
 A simple, multiprocess-safe logger for Python
 
-**This requires Python 3+. Support for Pythons down to 2.6 are planned for future releases**
+**This requires Python 3+. Support for Pythons down to 2.6 are planned for future releases.**
 
 Why
 ---
