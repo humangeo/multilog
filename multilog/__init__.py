@@ -1,6 +1,5 @@
-"""Multilog command line scripts."""
+"""Multilog logging daemon"""
+from __future__ import absolute_import, print_function, unicode_literals
 import sys
 
-if sys.version_info < (3, 0):
-    sys.stdout.write("Multilog requires Python 3 or newer.\n")
-    sys.exit(-1)
+IS_PYTHON2 = sys.version_info < (3, 0)

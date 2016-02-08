@@ -1,4 +1,5 @@
 """Command line logging daemon"""
+from __future__ import absolute_import, print_function, unicode_literals
 
 import argparse
 import logging
@@ -9,7 +10,7 @@ from pkg_resources import get_distribution
 
 from multilog.receivers import DEFAULT_HOST, DEFAULT_PORT, LogReceiver
 
-__version__ = get_distribution('multilog').version # pylint: disable=no-member
+__version__ = get_distribution('multilog').version # pylint: disable=no-member,maybe-no-member
 
 def setup_logging(config_path):
     """Initialize the logger
@@ -18,7 +19,7 @@ def setup_logging(config_path):
 
     """
     if not os.path.exists(config_path):
-        raise IOError("Configuration file '{}' not found. Create it, or pass it in with the '-c' switch.".format(
+        raise IOError("Configuration file '{0}' not found. Create it, or pass it in with the '-c' switch.".format(
             config_path))
     logging.config.fileConfig(config_path, defaults={"root_handler": "multilogServerHandler"})
 
@@ -27,7 +28,7 @@ def main():
     args = parse_args()
     setup_logging(args.config_path)
     tcpserver = LogReceiver(host=args.server, port=args.port)
-    print("Starting TCP server '{}:{}'...".format(args.server, args.port))
+    print("Starting TCP server '{0}:{1}'...".format(args.server, args.port))
     try:
         tcpserver.serve_until_stopped()
     except KeyboardInterrupt:
