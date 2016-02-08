@@ -9,8 +9,6 @@ Multilog
 
 A simple, multiprocess-safe logger for Python
 
-**This requires Python 3+. Support for Pythons down to 2.6 are planned for future releases.**
-
 Why
 ---
 
@@ -157,3 +155,8 @@ Then, in your application, pass the root handler name into the logging config:
     logging.config.fileConfig(config_path, defaults={"root_handler": "multilogClientHandler"})
 
 Multilog will always load the ``multilogServerHandler`` handler.  If you don't want to run Multilog (if you're running a single-threaded local dev server, for example), simply change your ``root_handler`` value to ``multilogServerHandler`` to write to the handler.
+
+Support
+-------
+
+Multilog is compatible with Python 2.6, 2.7, and 3.3+.
