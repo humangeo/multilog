@@ -14,7 +14,8 @@ else:
     from unittest.mock import patch, MagicMock
     SOCKETSERVER = "socketserver"
 
-def mock_streamreqhandler_init(self, *args, _logname=None):
+def mock_streamreqhandler_init(self, *args, **kwargs):
+    _logname = kwargs.pop("_logname")
     self.server = MagicMock()
     self.server.logname = _logname
 
