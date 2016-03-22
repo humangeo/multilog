@@ -25,7 +25,7 @@ def setup_logging(config_path):
 
 def main():
     """Do the thing"""
-    args = parse_args()
+    args = create_parser().parse_args()
     setup_logging(args.config_path)
     tcpserver = LogReceiver(host=args.server, port=args.port)
     print("Starting TCP server '{0}:{1}'...".format(args.server, args.port))
@@ -35,10 +35,10 @@ def main():
         print("Interrupt received. Stopping")
         sys.exit(0)
 
-def parse_args():
-    """Parse the thing
+def create_parser():
+    """Generate the argparser
 
-    :returns: The parsed arguments
+    :returns: The parser
 
     """
     parser = argparse.ArgumentParser(description="A simple logger for multiple Python processes.", prog="multilog", # pylint: disable=no-member
@@ -47,7 +47,7 @@ def parse_args():
     parser.add_argument("-p", "--port", dest="port", default=DEFAULT_PORT, type=int, help="The port to listen on.")
     parser.add_argument("-c", "--config", dest="config_path", default="logging.ini",
                         help="The log configuration to load.")
-    return parser.parse_args()
+    return parser
 
 if __name__ == "__main__":
     main()
